@@ -7,8 +7,11 @@ const port = 3000
 server.use(express.static('public')) //servar ut publica filer
 
 io.on('connection', (socket) => {
-
     console.log('new connection')
+
+    socket.on('message', (incomingResult) => {
+        console.log(incomingResult)
+    })
 }) 
 
  /* server.get('/', (req, res) => {
