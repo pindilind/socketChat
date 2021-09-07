@@ -1,16 +1,17 @@
+let socket = io()
 
-
-socket.on('msgInput', (incoming) => {
+socket.on('msgInput', (incomingResult) => {
 
     const msgList = document.getElementById('messages')
-    let msgListItem = document.createElement("li")
-    msgListItem.innerText = incoming.msgInput
+    const msgListItem = document.createElement("li")
+    msgListItem.innerText = incomingResult.message
     msgList.appendChild(msgListItem) 
 })
 
 function submitMsg() {
-    const chatInput = document.getElementById("msgInput")
-    const msgInput = chatInput.value 
-    msgInput.value = ""
-    socket.emit('msgInput', {msgInput})
+    const input = document.getElementById("msgInput")
+    const message = input.value 
+    input.value = ""
+
+    socket.emit('msgInput', { message })
 }

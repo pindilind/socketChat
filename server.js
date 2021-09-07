@@ -9,8 +9,9 @@ server.use(express.static('public')) //servar ut publica filer
 io.on('connection', (socket) => {
     console.log('new connection')
 
-    socket.on('message', (incomingResult) => {
-        console.log(incomingResult)
+    socket.on('msgInput', (incomingResult) => {
+        //console.log(incomingResult)
+        io.emit('msgInput', incomingResult)
     })
 }) 
 
