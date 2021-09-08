@@ -15,10 +15,13 @@ io.on('connection', (socket) => {
         io.emit('msgInput', incomingResult)
     })
 
+
     socket.on("disconnect", () => {
       console.log("user disconnected")
       //io.emit('test' )
     })
+
+
 }) 
 
  /* server.get('/', (req, res) => {
