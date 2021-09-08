@@ -8,30 +8,38 @@ server.use(express.static('public')) //servar ut publica filer
 
 io.on('connection', (socket) => {
 
-  console.log("new chat user")
-  
-  socket.on("join", (incomingResult) => {
-    console.log(incomingResult);
+    console.log("new chat user")
 
-    socket.join(incomingResult)
-    io.to(incomingResult).emit("joined", {name: incomingResult.name})
+    socket.on("join", (incomingResult) => {
+        console.log(incomingResult);
 
-  })
+        socket.join(incomingResult)
+        io.to(incomingResult).emit("joined", { name: incomingResult.name })
+    })
+
+
+    socket.on('msgInput', (incomingResult) => {
+
+        console.log('hej')
+        io.emit('msgInput', incomingResult)
+    })
+
     
-  socket.on('msgInput', (incomingResult) => {
-     
-    //console.log(incomingResult)
-    io.emit('msgInput', incomingResult)
-  })
+    socket.on("typing", (incomingResult) => {
+        
+        console.log('Nu är jag i typing')
+        io.emit('isTyping', incomingResult)
+    })
 
-  socket.on("disconnect", () => {
-    console.log("has left the chat") 
-    //io.emit('test' )
-  }) 
-}) 
 
- /* server.get('/', (req, res) => {
-  res.send('Hello World!')
+    socket.on("disconnect", () => {
+        console.log("has left the chat")
+        //io.emit('test' )
+    })
+})
+
+/* server.get('/', (req, res) => {
+ res.send('Hello World!')
 }) */
 
 /* server.listen(port, () => {
