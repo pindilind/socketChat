@@ -3,10 +3,19 @@ let name = ""
 
 window.onload = () => {
     name = prompt('Skriv ditt namn')
+
+    socket.emit("join", { name })
 }
 
+socket.on("joined", (incomingResult) => {
+    console.log(incomingResult.name + " joined the chat")
 
-//hämtar namn och message från server
+    const msgList = document.getElementById('messages')
+    const msgListItem = document.createElement("li")
+    msgListItem.innerText = incomingResult.name + " joined the chat"
+    msgList.appendChild(msgListItem) 
+})
+
 socket.on('msgInput', (incomingResult) => {
     console.log(incomingResult)
 
@@ -16,11 +25,19 @@ socket.on('msgInput', (incomingResult) => {
     msgList.appendChild(msgListItem)  */
 })
 
-//knapp för att hämta input och tömma den vid knapptryck
+socket.on('disconnected', () => {
+    console.log(name + " left the chat")
+}) 
+
+
 function submitMsg() {
     const input = document.getElementById("msgInput")
     const message = input.value 
     input.value = ""
 
     socket.emit('msgInput', { name, message })
+}
+
+function leaveChat() {
+    console.log("leave chat")
 }
