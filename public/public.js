@@ -17,10 +17,10 @@ socket.on("joined", (incomingResult) => {
 })
 
 socket.on('msgInput', (incomingResult) => {
-     const msgList = document.getElementById('messages')
-      const msgListItem = document.createElement("li")
-      msgListItem.innerText = incomingResult.name+ ": " + incomingResult.message
-      msgList.appendChild(msgListItem)
+    const msgList = document.getElementById('messages')
+    const msgListItem = document.createElement("li")
+    msgListItem.innerText = incomingResult.name+ ": " + incomingResult.message
+    msgList.appendChild(msgListItem)
 })
 
 

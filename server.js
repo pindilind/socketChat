@@ -14,7 +14,8 @@ io.on('connection', (socket) => {
         console.log(incomingResult);
 
         socket.join(incomingResult)
-        io.to(incomingResult).emit("joined", { name: incomingResult.name })
+        //io.to(incomingResult).emit("joined", { name: incomingResult.name })
+        io.emit('joined', {name: incomingResult.name})
     })
 
 
