@@ -38,6 +38,7 @@ socket.on('typing', (incomingResult) => {
     
 })
 
+socket.emit('leave', { name });
 
 let msgInput = document.getElementById('msgInput')
 
@@ -54,6 +55,3 @@ socket.on('disconnected', () => {
 
 
 
-function leaveChat() {
-    console.log("leave chat")
-}
