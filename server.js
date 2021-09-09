@@ -32,19 +32,12 @@ io.on('connection', (socket) => {
         io.emit('isTyping', incomingResult)
     })
 
-
-    socket.on("disconnect", () => {
-        console.log("has left the chat")
-        //io.emit('test' )
+    socket.on('leave', () => {
+      console.log('... has left')
+     
+      io.emit('leftchat');
     })
-})
+  })
 
-/* server.get('/', (req, res) => {
- res.send('Hello World!')
-}) */
-
-/* server.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-}) */
 
 http.listen(port, () => console.log("Tjohooo! Det fungerade :) "))

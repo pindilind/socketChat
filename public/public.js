@@ -31,9 +31,15 @@ socket.on('isTyping', () => {
 
 })
 
+socket.emit('leave', { name });
 
-socket.on('disconnected', () => {
-    console.log(name + " left the chat")
+socket.on('leftchat', () => {
+    console.log(name + " har lämnat")
+
+    const msgList = document.getElementById('messages')
+    const msgListItem = document.createElement("li")
+    msgListItem.innerText = name + " has left the chat"
+    msgList.appendChild(msgListItem)
 })
 
 
@@ -45,6 +51,3 @@ function submitMsg() {
     socket.emit('msgInput', { name, message })
 }
 
-function leaveChat() {
-    console.log("leave chat")
-}
