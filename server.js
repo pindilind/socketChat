@@ -21,17 +21,14 @@ io.on('connection', (socket) => {
 
     socket.on('msgInput', (incomingResult) => {
 
-        console.log('hej')
         io.emit('msgInput', incomingResult)
     })
 
     
     socket.on("typing", (incomingResult) => {
-        
         console.log('Nu är jag i typing')
-        io.emit('isTyping', incomingResult)
+        socket.broadcast.emit('typing', incomingResult)
     })
-
 
     socket.on("disconnect", () => {
         console.log("has left the chat")
