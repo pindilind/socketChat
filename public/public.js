@@ -1,5 +1,7 @@
 let socket = io()
 let name = "";
+let room = "ChatRoom";
+
 
 window.onload = () => {
     name = prompt('Skriv ditt namn')
@@ -8,30 +10,36 @@ window.onload = () => {
 }
 
 socket.on("joined", (incomingResult) => {
-    console.log(incomingResult.name + " joined the chat")
+    console.log(incomingResult.name + " joined the " + room);
 
     const msgList = document.getElementById('messages')
     const msgListItem = document.createElement("li")
-    msgListItem.innerText = incomingResult.name + " joined the chat"
+    msgListItem.innerText = incomingResult.name + " joined the " + room;
     msgList.appendChild(msgListItem)
 })
 
 socket.on('msgInput', (incomingResult) => {
+    console.log(incomingResult.name + ': ' + incomingResult.message)
     document.getElementById('typeDiv').innerHTML = ""
     const msgList = document.getElementById('messages')
     const msgListItem = document.createElement("li")
-    msgListItem.innerText = incomingResult.name + ": " + incomingResult.message
+    msgListItem.innerText = incomingResult.name + ": " + incomingResult.message;
     msgList.appendChild(msgListItem)
 })
 
 function submitMsg() {
-    const input = document.getElementById("msgInput")
-    const message = input.value
-    input.value = ""
 
-    socket.emit('msgInput', { name, message })
+    if (document.getElementById("msgInput").value == "") {
+        alert("Ops! du glömde skriva något...")
+        return
+    } else {
+        const input = document.getElementById('msgInput')
+        const message = input.value
+        input.value = ""
+    
+        socket.emit('msgInput', { name, message })}
+
 }
-
 
 socket.on('typing', (incomingResult) => {
 
@@ -43,7 +51,8 @@ socket.on('typing', (incomingResult) => {
   }
     typeDiv.innerHTML = '<em>' + incomingResult.name + " is typing..." + '</em>'
     
-})
+}) 
+
 
 socket.emit('leave', { name });
 
@@ -61,8 +70,16 @@ msgInput.addEventListener('keyup', () => {
 
 })
 
-socket.on('disconnected', () => {
-    console.log(name + " left the chat")
+
+socket.on("disconnect", () => {
+
+    console.log(name + " har lämnat " + room)
+    
+    const msgList = document.getElementById('messages')
+    const msgListItem = document.createElement("li")
+    msgListItem.innerText = name + " har lämnat " + room
+    msgList.appendChild(msgListItem) 
+
 })
 
 
