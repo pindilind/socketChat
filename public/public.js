@@ -34,6 +34,13 @@ function submitMsg() {
 
 
 socket.on('typing', (incomingResult) => {
+
+    const { typing, name } = incomingResult;
+
+  if (!typing) {
+    typeDiv.innerHTML = "";
+    return;
+  }
     typeDiv.innerHTML = '<em>' + incomingResult.name + " is typing..." + '</em>'
     
 })
@@ -45,7 +52,12 @@ let msgInput = document.getElementById('msgInput')
 //keypress funktion för att hämta värde ur input
 msgInput.addEventListener('keyup', () => {
 
-    socket.emit('typing', { name } ) 
+    socket.emit("typing", {
+            typing: msgInput.value.length > 0,
+            name,
+          });
+
+    /* socket.emit('typing', { name } ) */ 
 
 })
 
@@ -53,5 +65,28 @@ socket.on('disconnected', () => {
     console.log(name + " left the chat")
 })
 
+
+
+async function dogApiResponse() { //hämtar api med en knapp
+    try {
+ let response = await fetch("https://dog.ceo/api/breeds/image/random")
+ let body = await response.json()
+ console.log(body)
+
+    } catch (err) {
+        console.log(err)
+    }
+
+}
+
+async function getDogApi() {
+    dogApiResponse()
+    /* if(msgInput.value == "/dog") {
+        const images = await dogApiResponse();
+        socket.emit('msgInput', images) 
+    
+    } */
+     
+}
 
 

@@ -30,6 +30,8 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('typing', incomingResult)
     })
 
+
+
     socket.on("disconnect", () => {
         console.log("has left the chat")
         //io.emit('test' )
