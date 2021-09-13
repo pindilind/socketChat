@@ -31,16 +31,17 @@ socket.on('msgInput', (incomingResult) => {
     msgList.appendChild(msgListItem)
 })
 
-function submitMsg() {
+async function submitMsg() {
 
-    if (document.getElementById("msgInput").value == "") {
-        alert("Ops! du glömde skriva något...")
-        return
-    } /* if (incomingResult.message === "/dog"); {
- FUNKAR INTE JUST NU
-
+    if(msgInput.value == "/dog") {
         dogApiResponse()
-    } */ else {
+        document.getElementById("msgInput").value = "";
+        
+    }else if(document.getElementById("msgInput").value == "") {
+        alert("Ops! du glömde skriva något...")
+        return;
+
+    } else {
         const input = document.getElementById('msgInput')
         const message = input.value
         input.value = ""
@@ -52,8 +53,7 @@ function submitMsg() {
   /*   if(incomingResult.message === "/dog") {
         dogApiResponse()
     } */
-/* }
- */
+
 socket.on('typing', (incomingResult) => {
 
     const { typing, name } = incomingResult;
