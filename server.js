@@ -6,6 +6,7 @@ const port = 3000
 
 server.use(express.static('public')) //servar ut publica filer
 
+//io är servern
 io.on('connection', (socket) => {
 
     console.log("new chat user")
@@ -26,7 +27,7 @@ io.on('connection', (socket) => {
 
     
     socket.on("typing", (incomingResult) => {
-        console.log('Nu är jag i typing')
+        
         socket.broadcast.emit('typing', incomingResult)
     })
 

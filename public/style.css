@@ -1,0 +1,14 @@
+
+#hideAndShow {
+    background-color: beige;
+    width: 100px;
+    height: 40px;
+}
+
+#hideAndShow.b {
+    visibility: visible;
+}
+
+#hideAndShow.a {
+    visibility: hidden;
+}
