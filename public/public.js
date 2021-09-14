@@ -4,7 +4,6 @@ let room = "ChatRoom";
 let typing = false;
 let typingTimeout
 
-
 window.onload = () => {
     name = prompt('Skriv ditt namn')
 
@@ -151,6 +150,7 @@ async function dogApiResponse() {
     try {
         let response = await fetch("https://dog.ceo/api/breeds/image/random")
         let body = await response.json()
+        console.log(body)
         return body;
 
     } catch (err) {
