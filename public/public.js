@@ -73,7 +73,7 @@ socket.on('typing', (incomingResult) => {
 })
 
 
-socket.emit('leave', { name });
+//socket.emit('leave', { name });
 
 let msgInput = document.getElementById('msgInput')
 
@@ -133,16 +133,38 @@ async function selectCommand() {
 
 
 
-socket.on("disconnect", () => {
+socket.on("disconnected", (incomingResult) => {
+    //rad 138 + 142 HAR PROBLEM ATT FÅ KONTAKT MED NAMNET
+    console.log(" disconnected from Chatroom")
 
-    console.log(name + " har lämnat " + room)
+    const msgList = document.getElementById('messages')
+    const msgListItem = document.createElement("li")
+    msgListItem.innerText = incomingResult.name + " har lämnat " + room
+    msgList.appendChild(msgListItem)
+
+    //document.getElementById("msgDiv").value = ""
+
+})
+
+async function leaveChat() {
+    console.log("leaving the chat...")
+    if (confirm("Do you really want to leave the ChatRoom?"))
+    console.log(name + " left the " + room)
+
+    socket.emit("disconnected", { name, room })
+
+    socket.disconnect()
+
+    //.innertext SKRIVS INTE UT HOS ALLA...
 
     const msgList = document.getElementById('messages')
     const msgListItem = document.createElement("li")
     msgListItem.innerText = name + " har lämnat " + room
     msgList.appendChild(msgListItem)
 
-})
+    
+}
+
 
 
 //hämtar api med en knapp

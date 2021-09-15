@@ -9,7 +9,7 @@ server.use(express.static('public')) //servar ut publica filer
 //io är servern
 io.on('connection', (socket) => {
 
-    console.log("new chat user")
+    console.log(" new chat user")
 
     socket.on("join", (incomingResult) => {
         console.log(incomingResult);
@@ -21,6 +21,7 @@ io.on('connection', (socket) => {
 
 
     socket.on('msgInput', (incomingResult) => {
+        console.log(incomingResult.name + " meddelande...")
 
         io.emit('msgInput', incomingResult)
     })
@@ -33,9 +34,10 @@ io.on('connection', (socket) => {
 
 
 
-    socket.on("disconnect", () => {
-        console.log("has left the chat")
-        //io.emit('test' )
+    socket.on("disconnected", (incomingResult) => {
+        console.log(incomingResult)
+        io.emit('disconnected', incomingResult )
+        //delete socket.id
     })
   })
 
