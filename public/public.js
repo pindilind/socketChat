@@ -16,6 +16,7 @@ socket.on("joined", (incomingResult) => {
     const msgList = document.getElementById('messages')
     const msgListItem = document.createElement("li")
     msgListItem.innerText = incomingResult.name + " joined the " + room;
+    msgListItem.style.color = "green"
     msgList.appendChild(msgListItem)
 
 })
@@ -67,9 +68,10 @@ socket.on('typing', (incomingResult) => {
         typeDiv.innerHTML = "";
         return;
     }
-
-    typeDiv.innerHTML = '<em>' + incomingResult.name + " is typing..." + '</em>'
-
+    let talkIcon = document.createElement("i")
+    talkIcon.classList = 'fas fa-comment-dots'
+    typeDiv.innerHTML = "talkIcon" + '<em>' + incomingResult.name + " is typing..." + '</em>'
+    
 })
 
 
@@ -140,6 +142,7 @@ socket.on("disconnected", (incomingResult) => {
     const msgList = document.getElementById('messages')
     const msgListItem = document.createElement("li")
     msgListItem.innerText = incomingResult.name + " har lämnat " + room
+    msgListItem.style.color = "red"
     msgList.appendChild(msgListItem)
 
     //document.getElementById("msgDiv").value = ""
@@ -160,6 +163,7 @@ async function leaveChat() {
     const msgList = document.getElementById('messages')
     const msgListItem = document.createElement("li")
     msgListItem.innerText = name + " har lämnat " + room
+    msgListItem.style.color = "red"
     msgList.appendChild(msgListItem)
 
     
