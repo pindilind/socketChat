@@ -189,3 +189,13 @@ async function dogApiResponse() {
     }
 }
 
+async function joinChat () {
+    name = prompt('Skriv ditt namn');
+
+    if (name.length >= 1) {
+        socket.emit('joined', { name });
+    }   else {
+        alert('Du glömde skriva ditt namn..')
+        return
+    }
+}

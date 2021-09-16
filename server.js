@@ -11,7 +11,7 @@ io.on('connection', (socket) => {
 
     console.log(" new chat user")
 
-    socket.on("join", (incomingResult) => {
+    socket.on("joined", (incomingResult) => {
         console.log(incomingResult);
 
         socket.join(incomingResult)
