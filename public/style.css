@@ -11,7 +11,7 @@ body {
 
 #headerDiv {
     overflow: hidden;
-    background-color: rgb(67, 43, 104);
+    background-image: linear-gradient(to right, #ff87ab , #ff5d8f ,#ff97b7);
     padding: 10px 10px;
     width: 100%;
     display: flex;
@@ -21,15 +21,26 @@ body {
 
 
 #header {
-
     text-align: center;
-    font-family: 'VT323', monospace;
+    font-family: 'Kiwi Maru', serif;
     font-size: 50px;
-    color: rgb(228, 222, 236);
+    color: rgb(255, 255, 244);
 }
 
-#btnDiv {
-    
+#sideText {
+    font-family: 'Kiwi Maru', serif;
+    font-size: 30px;
+    margin-top: -37px;
+    margin-left: 200px;
+    color: #ff97b7;
+}
+
+#sideText2 {
+    font-family: 'Pacifico', cursive;
+    font-size: 18px;
+    color: rgb(255, 255, 244);
+    margin-top: -25px;
+    margin-left: -50px;
 }
 
 #talkIcon {
@@ -41,11 +52,11 @@ body {
     padding: 20px;
     background-color: rgb(255, 255, 244);
     overflow: auto;
-    height: 431px;
+    height: 373px;
 }
 
 .inputContainer {
-    background-color: aquamarine;
+    background-image: linear-gradient(to right, #ff87ab , #ff5d8f ,#ff97b7);
     padding: 3px;
     position: fixed;
     bottom: 0;
@@ -56,22 +67,35 @@ body {
     border: 0;
     padding: 10px;
     width: 90%;
-
+    background-color: rgb(255, 255, 244);
 }
 
 button {
     width: 9%;
-    background-color: blue;
+    background-color: #ff5d8f;
     border: none;
     padding: 10px;
+    color: rgb(255, 255, 244);
 }
 
-ul {
+#messages {
     list-style-type: none;
-  }
+    margin: 0;
+    padding: 0;
+}
+
+#messages ul {
+    padding: 5px 10px;
+}
+
+#msgListItem li:nth-child(odd) {
+    background: blue;
+}
 
 #hideAndShow {
-    background-color: beige;
+    background-color: rgb(255, 255, 244);
+    width: 200px;
+    padding: 2px;
 }
 
 #hideAndShow.b {
@@ -86,19 +110,19 @@ ul {
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888; 
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-  }
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #ff5d8f;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #ff5d8f;
+}
