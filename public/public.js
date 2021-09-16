@@ -4,11 +4,13 @@ let room = "ChatRoom";
 let typing = false;
 let typingTimeout
 
-window.onload = () => {
-    //name = prompt('Skriv ditt namn')
+/* window.onload = () => {
+    name = prompt('Skriv ditt namn')
 
-    //socket.emit('join', { name })
-}
+    socket.emit('join', { name })
+} */
+
+document.getElementById("toggleLeave").style.visibility = "hidden";
 
 socket.on("joined", (incomingResult) => {
     
@@ -19,18 +21,14 @@ socket.on("joined", (incomingResult) => {
     msgListItem.style.fontWeight = "bold"
     msgListItem.style.margin = "3px"
 
-
-
     let heartIcon = document.createElement("i")
     heartIcon.classList = "fas fa-heart"
     msgList.appendChild(heartIcon)
     msgListItem.appendChild(heartIcon)
     msgList.appendChild(msgListItem)
 
-
-
+    
 })
-
 
 socket.on('msgInput', (incomingResult) => {
 
@@ -40,14 +38,28 @@ socket.on('msgInput', (incomingResult) => {
     msgListItem.style.margin = "10px"
 
     msgList.appendChild(msgListItem)
-    
-
 })
 
 //knapp för att skicka meddelande/bilder
 async function submitMsg() {
 
+    if (name === ""){
+        const msgList = document.getElementById('joinMsg')
+        const msgListItem = document.createElement("h1")
+        msgListItem.innerHTML = '<b> Please JOIN the Chat... </b>';
+        msgListItem.style.justifyContent = "center" ;
+        msgListItem.style.color = "#ff5d8f";
+
+        msgList.appendChild(msgListItem)
+    }
+
     let dogResponse
+
+    if (name === "") {
+        socket.disconnect;
+        document.getElementById('msgInput').value = ""
+        return
+    }
 
     if (msgInput.value == "/dog") {
         
@@ -58,7 +70,7 @@ async function submitMsg() {
         socket.emit('msgInput', { name, message: dogResponse.message });
 
     } else if (document.getElementById("msgInput").value == "") {
-        alert("Ops! du glömde skriva något...")
+        alert("Ops! you missed to write a message...")
         return;
 
     } else {
@@ -68,9 +80,10 @@ async function submitMsg() {
 
         socket.emit('msgInput', { name, message });
     }
+
+    
+
 }
-
-
 
 socket.on('typing', (incomingResult) => {
 
@@ -93,7 +106,7 @@ let msgInput = document.getElementById('msgInput')
 
 //keypress funktion för att hämta värde ur input
 msgInput.addEventListener('keyup', () => {
-
+    
     if (!typing) {
         typing = true
 
@@ -113,8 +126,6 @@ msgInput.addEventListener('keyup', () => {
             name
         })
     }, 1000);
-
-
 })
 
 async function hideShow() {
@@ -137,7 +148,6 @@ async function hideShow() {
 
     } else {
         document.getElementById('hideAndShow').className = "a"
-
     }
 }
 
@@ -147,10 +157,8 @@ async function selectCommand() {
     document.getElementById('hideAndShow').className = "a"
 }
 
-
-
 socket.on("disconnected", (incomingResult) => {
-    //rad 138 + 142 HAR PROBLEM ATT FÅ KONTAKT MED NAMNET
+    
     console.log(" disconnected from Chatroom")
 
     const msgList = document.getElementById('messages')
@@ -179,12 +187,9 @@ async function leaveChat() {
 
     socket.disconnect()
 
+    document.getElementById("toggleLeave").style.visibility = "hidden";
+    document.getElementById("toggleJoin").style.visibility = "visible";
 }
-
-
-
-
-
 
 //hämtar api med en knapp
 async function dogApiResponse() {
@@ -208,16 +213,27 @@ async function dogApiResponse() {
     } catch (err) {
         console.log(err)
     }
-
 }
 
 async function joinChat () {
-    name = prompt('Skriv ditt namn');
+    
+    name = prompt('Enter your name, please');
 
     if (name.length >= 1) {
         socket.emit('joined', { name });
     }   else {
-        alert('Du glömde skriva ditt namn..')
+        alert('You missed to enter your name...')
+        name = prompt('Enter your name');
         return
-    }
+    } 
+
+    //VILL TA BORT TEXTEN "PLEASE JOIN THE CHAT..."
+    
+    document.getElementById('joinMsg').style.visibility = "hidden";
+    
+
+    document.getElementById("toggleJoin").style.visibility = "hidden";
+    document.getElementById("toggleLeave").style.visibility = "visible";
+
 }
+
