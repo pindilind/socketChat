@@ -5,9 +5,9 @@ let typing = false;
 let typingTimeout
 
 window.onload = () => {
-    name = prompt('Skriv ditt namn')
+    //name = prompt('Skriv ditt namn')
 
-    socket.emit('join', { name })
+    //socket.emit('join', { name })
 }
 
 socket.on("joined", (incomingResult) => {
@@ -211,3 +211,13 @@ async function dogApiResponse() {
 
 }
 
+async function joinChat () {
+    name = prompt('Skriv ditt namn');
+
+    if (name.length >= 1) {
+        socket.emit('joined', { name });
+    }   else {
+        alert('Du glömde skriva ditt namn..')
+        return
+    }
+}
