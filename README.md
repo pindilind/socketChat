@@ -31,8 +31,8 @@ GitHub link: https://github.com/pindilind/socketChat.git
 
 #### A chat room using socket.io, Node.js and Express
 
-This application is a chat room with one "room". To join the chat room requires you to enter your name to join. In the chat room all participants can see who is joining, writing messages, sending url (images from an external API) and leaving. 
-Enjoy a good chat with old and new friends!
+This application is a chat room with one "room". To join the chat room requires you to enter your name to join. In the chat room all participants can see who is joining, writing messages, sending url (images from an external API) and leaving. When you have left the chatroom you can no longer participate in the chat without login again.
+Enjoy a good chat with old and new friends! <3
 
 ## Installation 
 
