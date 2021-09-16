@@ -4,11 +4,11 @@ let room = "ChatRoom";
 let typing = false;
 let typingTimeout
 
-window.onload = () => {
+/* window.onload = () => {
     name = prompt('Skriv ditt namn')
 
     socket.emit('join', { name })
-}
+} */
 
 socket.on("joined", (incomingResult) => {
     
@@ -19,18 +19,12 @@ socket.on("joined", (incomingResult) => {
     msgListItem.style.fontWeight = "bold"
     msgListItem.style.margin = "3px"
 
-
-
     let heartIcon = document.createElement("i")
     heartIcon.classList = "fas fa-heart"
     msgList.appendChild(heartIcon)
     msgListItem.appendChild(heartIcon)
     msgList.appendChild(msgListItem)
-
-
-
 })
-
 
 socket.on('msgInput', (incomingResult) => {
 
@@ -40,8 +34,6 @@ socket.on('msgInput', (incomingResult) => {
     msgListItem.style.margin = "10px"
 
     msgList.appendChild(msgListItem)
-    
-
 })
 
 //knapp för att skicka meddelande/bilder
@@ -69,8 +61,6 @@ async function submitMsg() {
         socket.emit('msgInput', { name, message });
     }
 }
-
-
 
 socket.on('typing', (incomingResult) => {
 
@@ -113,8 +103,6 @@ msgInput.addEventListener('keyup', () => {
             name
         })
     }, 1000);
-
-
 })
 
 async function hideShow() {
@@ -137,7 +125,6 @@ async function hideShow() {
 
     } else {
         document.getElementById('hideAndShow').className = "a"
-
     }
 }
 
@@ -146,8 +133,6 @@ async function selectCommand() {
     document.getElementById('msgInput').value = "/dog"
     document.getElementById('hideAndShow').className = "a"
 }
-
-
 
 socket.on("disconnected", (incomingResult) => {
     //rad 138 + 142 HAR PROBLEM ATT FÅ KONTAKT MED NAMNET
@@ -178,13 +163,7 @@ async function leaveChat() {
     socket.emit("disconnected", { name, room })
 
     socket.disconnect()
-
 }
-
-
-
-
-
 
 //hämtar api med en knapp
 async function dogApiResponse() {
@@ -208,6 +187,5 @@ async function dogApiResponse() {
     } catch (err) {
         console.log(err)
     }
-
 }
 
