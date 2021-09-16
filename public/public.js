@@ -179,18 +179,9 @@ async function leaveChat() {
 
     socket.disconnect()
 
-
-    //.innertext SKRIVS INTE UT HOS ALLA...
-
-    const msgList = document.getElementById('messages')
-    const msgListItem = document.createElement("li")
-    msgListItem.innerText = name + " har lämnat " + room + " "
-    
-
-    msgList.appendChild(msgListItem)
-
-    
 }
+
+
 
 
 

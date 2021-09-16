@@ -21,8 +21,7 @@ io.on('connection', (socket) => {
 
 
     socket.on('msgInput', (incomingResult) => {
-        console.log(incomingResult.name + " meddelande...")
-
+    
         io.emit('msgInput', incomingResult)
     })
 
@@ -32,8 +31,7 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('typing', incomingResult)
     })
 
-
-
+    
     socket.on("disconnected", (incomingResult) => {
         console.log(incomingResult)
         io.emit('disconnected', incomingResult )
