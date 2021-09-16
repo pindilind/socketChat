@@ -11,25 +11,36 @@ window.onload = () => {
 }
 
 socket.on("joined", (incomingResult) => {
-    console.log(incomingResult.name + " joined the " + room);
-
+    
     const msgList = document.getElementById('messages')
     const msgListItem = document.createElement("li")
-    msgListItem.innerText = incomingResult.name + " joined the " + room;
-    msgListItem.style.color = "green"
+    msgListItem.innerText = incomingResult.name + " joined the " + room + " ";
+    msgListItem.style.color = "#ff5d8f"
+    msgListItem.style.fontWeight = "bold"
+    msgListItem.style.margin = "3px"
+
+
+
+    let heartIcon = document.createElement("i")
+    heartIcon.classList = "fas fa-heart"
+    msgList.appendChild(heartIcon)
+    msgListItem.appendChild(heartIcon)
     msgList.appendChild(msgListItem)
+
+
 
 })
 
 
 socket.on('msgInput', (incomingResult) => {
 
-    console.log(incomingResult.name + ': ' + incomingResult.message)
-
     const msgList = document.getElementById('messages')
     const msgListItem = document.createElement("li")
-    msgListItem.innerText = incomingResult.name + ": " + incomingResult.message;
+    msgListItem.innerHTML = '<b>' + incomingResult.name + '</b>' +  ": " + incomingResult.message;
+    msgListItem.style.margin = "10px"
+
     msgList.appendChild(msgListItem)
+    
 
 })
 
@@ -39,10 +50,11 @@ async function submitMsg() {
     let dogResponse
 
     if (msgInput.value == "/dog") {
-
+        
         dogResponse = await dogApiResponse()
-        console.log(dogResponse)
         document.getElementById("msgInput").value = "";
+       /*  socket.img() */
+        
         socket.emit('msgInput', { name, message: dogResponse.message });
 
     } else if (document.getElementById("msgInput").value == "") {
@@ -70,7 +82,7 @@ socket.on('typing', (incomingResult) => {
     }
     let talkIcon = document.createElement("i")
     talkIcon.classList = 'fas fa-comment-dots'
-    typeDiv.innerHTML = "talkIcon" + '<em>' + incomingResult.name + " is typing..." + '</em>'
+    typeDiv.innerHTML = '<em>' + incomingResult.name + " is typing..." + '</em>'
     
 })
 
@@ -111,6 +123,7 @@ async function hideShow() {
     document.getElementById('hideAndShow')
 
     if (msgInput == "/") {
+
         document.getElementById('hideAndShow').className = "b"
 
     } else if (msgInput == "/d") {
@@ -129,6 +142,7 @@ async function hideShow() {
 }
 
 async function selectCommand() {
+    
     document.getElementById('msgInput').value = "/dog"
     document.getElementById('hideAndShow').className = "a"
 }
@@ -141,11 +155,18 @@ socket.on("disconnected", (incomingResult) => {
 
     const msgList = document.getElementById('messages')
     const msgListItem = document.createElement("li")
-    msgListItem.innerText = incomingResult.name + " har lämnat " + room
-    msgListItem.style.color = "red"
+    msgListItem.innerText = incomingResult.name + " has left the " + room + " "
+
+    msgListItem.style.color = "#861438"
+    msgListItem.style.fontWeight = "bold"
+
+    let brokenHeartIcon = document.createElement("i")
+    brokenHeartIcon.classList = "fas fa-heart-broken"
+    msgList.appendChild(brokenHeartIcon)
+    msgListItem.appendChild(brokenHeartIcon)
+
     msgList.appendChild(msgListItem)
 
-    //document.getElementById("msgDiv").value = ""
 
 })
 
@@ -158,16 +179,19 @@ async function leaveChat() {
 
     socket.disconnect()
 
+
     //.innertext SKRIVS INTE UT HOS ALLA...
 
     const msgList = document.getElementById('messages')
     const msgListItem = document.createElement("li")
-    msgListItem.innerText = name + " har lämnat " + room
-    msgListItem.style.color = "red"
+    msgListItem.innerText = name + " har lämnat " + room + " "
+    
+
     msgList.appendChild(msgListItem)
 
     
 }
+
 
 
 
@@ -177,6 +201,17 @@ async function dogApiResponse() {
         let response = await fetch("https://dog.ceo/api/breeds/image/random")
         let body = await response.json()
         console.log(body)
+
+        let img = document.createElement('img')
+        img.style.maxHeight = "250px"
+        img.style.maxWidth = "250px"
+        img.style.justifyContent = "center"
+        img.style.alignItems = "center"
+        img.style.display = "flex"
+        img.style.objectFit = "cover";
+        img.src = body.message//hämtar fetch
+
+        document.getElementById('messages').appendChild(img)
         return body;
 
     } catch (err) {
