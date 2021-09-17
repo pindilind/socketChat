@@ -43,16 +43,12 @@ body {
     margin-left: -50px;
 }
 
-#talkIcon {
-    font-size: 30px;
-    align-items: center;
-}
 
 #allMessagesDiv {
     padding: 20px;
     background-color: rgb(255, 255, 244);
     overflow: auto;
-    height: 373px;
+    height: 65vh;
 }
 
 .inputContainer {
@@ -88,9 +84,6 @@ button {
     padding: 5px 10px;
 }
 
-#msgListItem li:nth-child(odd) {
-    background: blue;
-}
 
 #hideAndShow {
     background-color: rgb(255, 255, 244);
