@@ -1,22 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@500&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <script src="/socket.io/socket.io.js"></script>
-    <script src="./public.js"></script>
+    <script defer src="./public.js"></script>
     <link rel="stylesheet" href="./style.css">
     <title>Linda & Susan socketChat</title>
 </head>
+
 <body>
-    <div>
-        <button onclick="leaveChat()">Leave</button>
+    <div id="headerDiv">
+        <div id="header">PINKY <h4 id="sideText">CHAT</h4><h4 id="sideText2">by Susan & Linda</h4>
+        </div>
+        <div id="btnDiv">
+            <button id="toggleJoin" onclick="joinChat()">Join</button>
+            <button id="toggleLeave" onclick="leaveChat()">Leave</button>
+            
+        </div>
     </div>
-    <ul id="messages"></ul>
+    <div>
+
+    </div>
+    <div id="allMessagesDiv">
+        <p id="joinMsg"></p>
+        <ul id="messages"></ul>
+    </div>
+
     <div class="inputContainer">
-        <input id="msgInput" autocomplete="off" type="text" />
+        <div id="typeDiv"></div>
+        <input id="msgInput" oninput="hideShow()" autocomplete="off" type="text" />
         <button onclick="submitMsg()">Send</button>
+        <div id="hideAndShow" onclick="selectCommand()" class="a">/dog</div>
     </div>
 </body>
+
 </html>
