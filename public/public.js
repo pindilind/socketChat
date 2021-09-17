@@ -4,11 +4,6 @@ let room = "ChatRoom";
 let typing = false;
 let typingTimeout
 
-/* window.onload = () => {
-    name = prompt('Skriv ditt namn')
-
-    socket.emit('join', { name })
-} */
 
 document.getElementById("toggleLeave").style.visibility = "hidden";
 
@@ -201,20 +196,30 @@ socket.on("disconnected", (incomingResult) => {
 
     msgList.appendChild(msgListItem)
 
-
+   
 })
 
 async function leaveChat() {
     console.log("leaving the chat...")
-    if (confirm("Do you really want to leave the ChatRoom?"))
+    
+
+    if (confirm("Do you really want to leave the ChatRoom?")){
         console.log(name + " left the " + room)
+    }
 
     socket.emit("disconnected", { name, room })
 
     socket.disconnect()
 
+    if (disconnect = true) {
+        document.getElementById("messages").innerHTML = "";  
+        
+    }
+    
     document.getElementById("toggleLeave").style.visibility = "hidden";
     document.getElementById("toggleJoin").style.visibility = "visible";
+
+    socket.connect();
 }
 
 //hämtar api med en knapp
@@ -239,8 +244,12 @@ async function joinChat() {
     } else {
         alert('You missed to enter your name...')
         name = prompt('Enter your name');
-        return
-    }
+        socket.emit('joined', { name });
+       
+    } 
+        
+        
+
 
     //VILL TA BORT TEXTEN "PLEASE JOIN THE CHAT..."
 
