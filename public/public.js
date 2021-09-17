@@ -34,7 +34,7 @@ socket.on('msgInput', (incomingResult) => {
 
     const msgList = document.getElementById('messages')
     const msgListItem = document.createElement("li")
-    msgListItem.innerHTML = '<b>' + incomingResult.name + '</b>' +  ": " + incomingResult.message;
+    msgListItem.innerHTML = '<b>' + incomingResult.name + ':</b> ' + incomingResult.message;
     msgListItem.style.margin = "10px"
 
     msgList.appendChild(msgListItem)
@@ -93,9 +93,12 @@ socket.on('typing', (incomingResult) => {
         typeDiv.innerHTML = "";
         return;
     }
-    let talkIcon = document.createElement("i")
-    talkIcon.classList = 'fas fa-comment-dots'
+    
     typeDiv.innerHTML = '<em>' + incomingResult.name + " is typing..." + '</em>'
+    typeDiv.style.color = "rgb(255, 255, 244)"
+    typeDiv.style.marginBottom = "3px"
+    typeDiv.style.marginLeft = "3px" 
+
     
 })
 
@@ -125,7 +128,7 @@ msgInput.addEventListener('keyup', () => {
             typing: false,
             name
         })
-    }, 1000);
+    }, 1500);
 })
 
 async function hideShow() {
@@ -167,6 +170,7 @@ socket.on("disconnected", (incomingResult) => {
 
     msgListItem.style.color = "#861438"
     msgListItem.style.fontWeight = "bold"
+    msgListItem.style.margin = "3px"
 
     let brokenHeartIcon = document.createElement("i")
     brokenHeartIcon.classList = "fas fa-heart-broken"
