@@ -1,9 +1,8 @@
-# Chat-app med socket.io
-### Inlämningsuppgift - Socket chat med Web API integration
+<h1>SOCKET CHAT 💬</h1>
 
-Grupp 4: Linda Gustafsson, Susan Isaksson | betygsnivå: G 
+Grupp 4: Linda Gustafsson, Susan Isaksson | betygsnivå: G | GitHub link: https://github.com/pindilind/socketChat.git
 
-GitHub link: https://github.com/pindilind/socketChat.git
+Inlämningsuppgift - Socket chat med Web API integration<br><br>
 
 #### Krav för godkänt: 
 
@@ -85,3 +84,4 @@ Now the server should be up and going in port 3000 in you localhost.
     Set the port to: 3000 (localhost:3000) 
 
 #### version 01.0.0/2021-09-17
+
